@@ -103,7 +103,7 @@ def main():
         print("\n🎉 所有步骤完成!")
         print("\n📝 使用说明:")
         print("   安装: pip install mcp-xiaozhi-server")
-        print("   运行: xiaozhi-server --host <HOST> --token <TOKEN>")
+        print("   运行: mcp-xiaozhi-server --host <HOST> --token <TOKEN>")
         
     except KeyboardInterrupt:
         print("\n\n⚠️ 操作被用户取消")

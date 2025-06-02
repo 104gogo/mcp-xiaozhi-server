@@ -37,7 +37,7 @@ Repository = "https://github.com/yourusername/mcp-xiaozhi-server"
 Issues = "https://github.com/yourusername/mcp-xiaozhi-server/issues"
 
 [project.scripts]
-xiaozhi-server = "mcp_xiaozhi_server.cli:main"
+mcp-xiaozhi-server = "mcp_xiaozhi_server.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

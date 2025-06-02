@@ -33,19 +33,13 @@ pip install -e .
 安装后，可以通过命令行启动服务器：
 
 ```bash
-xiaozhi-server --host https://api.xiaozhi.com --token your_api_token
-```
-
-或者使用短选项：
-
-```bash
-xiaozhi-server -h https://api.xiaozhi.com -t your_api_token
+mcp-xiaozhi-server --host https://api.xiaozhi.com --token your_api_token
 ```
 
 ### 参数说明
 
-- `--host`, `-h`: 小智 API 主机地址（必填）
-- `--token`, `-t`: 小智 API 访问令牌（必填）
+- `--host`: 小智 API 主机地址（必填）
+- `--token`: 小智 API 访问令牌（必填）
 - `--version`, `-v`: 显示版本信息
 
 ### 作为 Python 模块使用

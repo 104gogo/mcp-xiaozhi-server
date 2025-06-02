@@ -16,18 +16,18 @@ def create_parser() -> argparse.ArgumentParser:
         epilog="""
 示例:
   %(prog)s --host https://api.xiaozhi.com --token your_api_token
-  %(prog)s -h https://api.xiaozhi.com -t your_api_token
+  %(prog)s --host https://api.xiaozhi.com --token your_api_token
         """
     )
     
     parser.add_argument(
-        '--host', '-h',
+        '--host',
         required=True,
         help='小智 API 主机地址 (必填)'
     )
     
     parser.add_argument(
-        '--token', '-t',
+        '--token',
         required=True,
         help='小智 API 访问令牌 (必填)'
     )

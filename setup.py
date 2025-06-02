@@ -46,7 +46,7 @@ setup(
     install_requires=read_requirements(),
     entry_points={
         "console_scripts": [
-            "xiaozhi-server=mcp_xiaozhi_server.cli:main",
+            "mcp-xiaozhi-server=mcp_xiaozhi_server.cli:main",
         ],
     },
     keywords="mcp xiaozhi agent ai server",
