@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-xiaozhi-server"
+version = "0.1.0"
+description = "MCP 小智服务器 - 智能体管理工具"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "mcp>=1.8.1",
+    "pydantic>=2.11.4",
+    "requests>=2.25.0",
+]
+keywords = ["mcp", "xiaozhi", "agent", "ai", "server"]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/mcp-xiaozhi-server"
+Repository = "https://github.com/yourusername/mcp-xiaozhi-server"
+Issues = "https://github.com/yourusername/mcp-xiaozhi-server/issues"
+
+[project.scripts]
+xiaozhi-server = "mcp_xiaozhi_server.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

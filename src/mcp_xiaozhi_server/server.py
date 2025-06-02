@@ -1,0 +1,35 @@
+from mcp.server.fastmcp import FastMCP, Context
+from .xiaozhi_server import XiaoZhiServerController
+
+
+def create_server() -> FastMCP:
+    """创建 MCP 服务器实例"""
+    # Initialize FastMCP server with name "XiaoZhiServer"
+    mcp = FastMCP("XiaoZhiServer")
+    
+    # Create an instance of XiaoZhiServerController for handling XiaoZhiServer API operations
+    controller = XiaoZhiServerController()
+    
+    @mcp.tool()
+    async def modify_agent(agent_number: int, feature: str, new_value: str) -> dict:
+        """修改智能体数据。
+        参数：
+        agent_number: 智能体编号（1表示第一个，2表示第二个，以此类推）
+        feature: 要修改的功能，支持："大语言模型", "TTS模型", "角色音色", "角色模板", "名称"
+        new_value: 新的值，如："豆包", "豆包语音合成", "男声", "湾湾小何", "新名字"
+        """
+        return controller.modify_xiaozhi_agent(agent_number, feature, new_value)
+    
+    return mcp
+
+
+def run_server():
+    """启动 MCP 服务器"""
+    mcp = create_server()
+    # Run the MCP server using standard input/output for communication
+    mcp.run(transport='stdio')
+
+
+if __name__ == "__main__":
+    run_server()
+    

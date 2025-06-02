@@ -1,0 +1,57 @@
+from setuptools import setup, find_packages
+import os
+
+# 读取 README.md
+def read_long_description():
+    """读取长描述"""
+    readme_path = os.path.join(os.path.dirname(__file__), "README.md")
+    if os.path.exists(readme_path):
+        with open(readme_path, "r", encoding="utf-8") as f:
+            return f.read()
+    return ""
+
+# 读取依赖
+def read_requirements():
+    """读取依赖列表"""
+    requirements_path = os.path.join(os.path.dirname(__file__), "requirements.txt")
+    if os.path.exists(requirements_path):
+        with open(requirements_path, "r", encoding="utf-8") as f:
+            return [line.strip() for line in f if line.strip() and not line.startswith("#")]
+    return []
+
+setup(
+    name="mcp-xiaozhi-server",
+    version="0.1.0",
+    author="Your Name",
+    author_email="your.email@example.com",
+    description="MCP 小智服务器 - 智能体管理工具",
+    long_description=read_long_description(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/yourusername/mcp-xiaozhi-server",
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+    ],
+    python_requires=">=3.8",
+    install_requires=read_requirements(),
+    entry_points={
+        "console_scripts": [
+            "xiaozhi-server=mcp_xiaozhi_server.cli:main",
+        ],
+    },
+    keywords="mcp xiaozhi agent ai server",
+    project_urls={
+        "Bug Reports": "https://github.com/yourusername/mcp-xiaozhi-server/issues",
+        "Source": "https://github.com/yourusername/mcp-xiaozhi-server",
+    },
+) 
