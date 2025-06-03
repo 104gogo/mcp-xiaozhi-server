@@ -35,7 +35,7 @@ def create_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         '--version', '-v',
         action='version',
-        version='mcp-xiaozhi-server 0.1.0'
+        version='mcp-xiaozhi-server 0.2.0'
     )
     
     return parser
