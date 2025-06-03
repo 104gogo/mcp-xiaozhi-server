@@ -1,5 +1,5 @@
 from mcp.server.fastmcp import FastMCP, Context
-from .xiaozhi_server import XiaoZhiServerController
+from .controller import XiaoZhiServerController
 
 
 def create_server() -> FastMCP:

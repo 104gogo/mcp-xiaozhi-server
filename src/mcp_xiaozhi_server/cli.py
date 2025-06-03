@@ -5,7 +5,7 @@
 import argparse
 import sys
 from .config import Config, set_config
-from .server import run_server
+from .main import run_server
 
 
 def create_parser() -> argparse.ArgumentParser:

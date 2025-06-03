@@ -22,12 +22,12 @@ def read_requirements():
 setup(
     name="mcp-xiaozhi-server",
     version="0.1.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="104gogo",
+    author_email="376830949@qq.com",
     description="MCP 小智服务器 - 智能体管理工具",
     long_description=read_long_description(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/mcp-xiaozhi-server",
+    url="https://github.com/104gogo/mcp-xiaozhi-server",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
@@ -51,7 +51,7 @@ setup(
     },
     keywords="mcp xiaozhi agent ai server",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/mcp-xiaozhi-server/issues",
-        "Source": "https://github.com/yourusername/mcp-xiaozhi-server",
+        "Bug Reports": "https://github.com/104gogo/mcp-xiaozhi-server/issues",
+        "Source": "https://github.com/104gogo/mcp-xiaozhi-server",
     },
 ) 
