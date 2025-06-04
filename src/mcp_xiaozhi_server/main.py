@@ -1,4 +1,4 @@
-from mcp.server.fastmcp import FastMCP, Context
+from mcp.server.fastmcp import FastMCP
 from .controller import XiaoZhiServerController
 
 # Initialize FastMCP server with name "XiaoZhiServer"
@@ -16,6 +16,11 @@ async def modify_agent(agent_number: int, feature: str, new_value: str) -> dict:
     new_value: 新的值，如："豆包", "豆包语音合成", "男声", "湾湾小何", "新名字"
     """
     return controller.modify_xiaozhi_agent(agent_number, feature, new_value)
+    
+@mcp.tool()
+def get_agent_list(query: str = "all") -> dict:
+    """获取智能体列表信息。支持查询：'count'/'数量' - 获取智能体总数, 'first'/'第一个' - 获取第一个智能体信息, 'all' - 获取所有智能体列表"""
+    return controller.get_xiaozhi_agent_list(query)
     
 
 

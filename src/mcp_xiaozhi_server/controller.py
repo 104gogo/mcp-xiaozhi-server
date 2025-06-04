@@ -369,4 +369,109 @@ class XiaoZhiServerController:
             logger.error(f"修改智能体时发生未知错误: {str(e)}")
             return {"success": False, "error": f"修改失败: {str(e)}"}
 
-    
+    def get_xiaozhi_agent_list(self, query: str = "all") -> dict:
+        """获取智能体列表信息。支持查询：'count'/'数量' - 获取智能体总数, 'first'/'第一个' - 获取第一个智能体信息, 'all' - 获取所有智能体列表"""
+        
+        try:
+            # 动态获取API配置
+            api_host, api_token = get_api_config()
+            
+            # 设置请求头
+            headers = {
+                "Authorization": f"Bearer {api_token}",
+                "Content-Type": "application/json"
+            }
+            
+            # 发送GET请求
+            response = requests.get(f"{api_host}/xiaozhi/agent/list", headers=headers, timeout=10)
+            
+            # 检查响应状态
+            if response.status_code != 200:
+                logger.error(f"API请求失败，状态码: {response.status_code}")
+                return {
+                    "success": False, 
+                    "error": f"API请求失败，状态码: {response.status_code}"
+                }
+            
+            # 解析JSON响应
+            data = response.json()
+            
+            # 检查API返回的code
+            if data.get("code") != 0:
+                logger.error(f"API返回错误，code: {data.get('code')}, msg: {data.get('msg')}")
+                return {
+                    "success": False,
+                    "error": f"API返回错误: {data.get('msg', '未知错误')}"
+                }
+            
+            # 获取智能体列表
+            agent_list = data.get("data", [])
+            
+            # 根据查询类型返回相应数据
+            query_lower = query.lower()
+            
+            # 查询智能体总数
+            if any(keyword in query_lower for keyword in ["count", "数量", "多少", "总数", "个数"]):
+                result = {
+                    "total_count": len(agent_list),
+                    "message": f"一共有 {len(agent_list)} 个智能体"
+                }
+                logger.info(f"获取智能体总数: {len(agent_list)}")
+                return {"success": True, "data": result}
+            
+            # 查询第一个智能体信息
+            elif any(keyword in query_lower for keyword in ["first", "第一个", "第一", "首个"]):
+                if len(agent_list) > 0:
+                    first_agent = agent_list[0]
+                    
+                    # 如果查询包含"名字"或"名称"
+                    if any(keyword in query_lower for keyword in ["名字", "名称", "name"]):
+                        result = {
+                            "agent_name": first_agent.get("agentName"),
+                            "message": f"第一个智能体的名字是: {first_agent.get('agentName')}"
+                        }
+                        logger.info(f"获取第一个智能体名字: {first_agent.get('agentName')}")
+                        return {"success": True, "data": result}
+                    
+                    # 如果查询包含"设备"
+                    elif any(keyword in query_lower for keyword in ["设备", "device"]):
+                        device_count = first_agent.get("deviceCount", 0)
+                        result = {
+                            "device_count": device_count,
+                            "agent_name": first_agent.get("agentName"),
+                            "message": f"第一个智能体 '{first_agent.get('agentName')}' 有 {device_count} 个设备"
+                        }
+                        logger.info(f"获取第一个智能体设备数: {device_count}")
+                        return {"success": True, "data": result}
+                    
+                    # 返回第一个智能体的完整信息
+                    else:
+                        logger.info(f"获取第一个智能体完整信息: {first_agent.get('agentName')}")
+                        return {"success": True, "data": first_agent}
+                else:
+                    return {
+                        "success": False,
+                        "error": "没有找到任何智能体"
+                    }
+            
+            # 返回所有智能体列表
+            else:
+                result = {
+                    "total_count": len(agent_list),
+                    "agents": agent_list
+                }
+                logger.info(f"获取所有智能体列表，共 {len(agent_list)} 个")
+                return {"success": True, "data": result}
+                
+        except requests.exceptions.RequestException as e:
+            logger.error(f"网络请求异常: {str(e)}")
+            return {"success": False, "error": f"网络请求失败: {str(e)}"}
+        except json.JSONDecodeError as e:
+            logger.error(f"JSON解析失败: {str(e)}")
+            return {"success": False, "error": f"响应数据解析失败: {str(e)}"}
+        except ValueError as e:
+            logger.error(f"环境变量错误: {str(e)}")
+            return {"success": False, "error": str(e)}
+        except Exception as e:
+            logger.error(f"未知错误: {str(e)}")
+            return {"success": False, "error": f"未知错误: {str(e)}"}
