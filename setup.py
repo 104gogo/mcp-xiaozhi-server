@@ -21,7 +21,7 @@ def read_requirements():
 
 setup(
     name="mcp-xiaozhi-server",
-    version="0.2.0",
+    version="0.3.0",
     author="104gogo",
     author_email="376830949@qq.com",
     description="MCP 小智服务器 - 智能体管理工具",
